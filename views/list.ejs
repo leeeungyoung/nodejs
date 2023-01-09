@@ -41,7 +41,7 @@
     <ul class="list-group">
       <% for(let i = 0; i < postdata.length; i++) { %>
         <li class="list-group-item">
-          <h4 class="detail" data-id="<%= postdata[i]._id %>">제목 : <%= postdata[i].제목 %></h4>
+          <h4 class="detail" data-id="<%= postdata[i]._id %>" style="cursor: pointer;">제목 : <%= postdata[i].제목 %></h4>
           <p>날짜 : <%= postdata[i].날짜 %></p>
           <button class="btn btn-danger delete" data-id="<%= postdata[i]._id %>">삭제</button>
           <button class="btn btn-warning update" data-id="<%= postdata[i]._id %>">수정</button>
