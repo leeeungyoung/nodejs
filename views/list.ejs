@@ -41,7 +41,7 @@
     <ul class="list-group">
       <% for(let i = 0; i < postdata.length; i++) { %>
         <li class="list-group-item">
-          <h4>제목 : <%= postdata[i].제목 %></h4>
+          <h4 class="detail" data-id="<%= postdata[i]._id %>">제목 : <%= postdata[i].제목 %></h4>
           <p>날짜 : <%= postdata[i].날짜 %></p>
           <button class="btn btn-danger delete" data-id="<%= postdata[i]._id %>">삭제</button>
           <button class="btn btn-warning update" data-id="<%= postdata[i]._id %>">수정</button>
@@ -54,27 +54,31 @@
   <script>
     $('#search').click(function() {
       let searchData = $('#search-input').val();
-      window.location.replace(`/search?value=${searchData}`) // 쿼리 스트링 형식으로 검색어 전달
+      window.location.replace(`/search?value=${searchData}`) 
     }); 
     
     $('.delete').click(function(e) {
       $.ajax({
         method: 'DELETE',
-        url: '/delete', // 요청 경로
-        data: {_id : e.target.dataset.id} // 게시물 번호, {_id : 클릭한 버튼의 id} 삭제 요청과 함께 보낼 데이터
+        url: '/delete', 
+        data: {_id : e.target.dataset.id} 
       }).done((result) => {
-        // 요청이 성공했을 경우에 할 일
-        $(this).parent('li').fadeOut();  // this는 클릭한 버튼
+
+        $(this).parent('li').fadeOut();  
       }). fail((error) => {
-        // 실패 메세지
+      
       })
 
     });
 
-    // 수정 버튼 기능 구현
     $('.update').click(function(e) {
       const id = e.target.dataset.id;
       location.replace(`/edit/${id}`);
+    });
+
+    $('.detail').click(function(e) {
+      const id = e.target.dataset.id;
+      location.replace(`/detail/${id}`) 
     });
   </script>
 
